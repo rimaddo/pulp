@@ -75,13 +75,13 @@ Additional environment variables per solver
 
 Sometimes, giving the path to the solver is not enough. This can be because the solver needs to know where other files are found (dynamic libraries it will use when running) or the PuLP API needs to import some specific python packages that are deployed with the solver (in case of the solvers that do not have a ``_CMD`` at the end).
 
-Whatever the reason, it's better to be safe than sorry. This means knowing what variables are usually used by which solver. Here I'm adding the necessary environment variables that are needed for each solver. The procedure is very similar to what we did with the ``PATH`` variable: sometimes you need to edit an existing variable and sometimes you need to create a new environment variable. So it looks explicit, I will be using my own paths to variables, but you will have to adapt them to your actual paths (e.g., if the version of the solver is not the same). I will be using my **Linux paths, since it just implies copying the last lines of my .bash_profile file**. I've adapted them to the Windows command line but, preferably, you would like to edit them via the GUI in windows.
+Whatever the reason, it's better to be safe than sorry. This means knowing what variables are usually used by which solver. Here I'm adding the necessary environment variables that are needed for each solver. The procedure is very similar to what we did with the ``PATH`` variable: sometimes you need to edit an existing variable and sometimes you need to create a new environment variable. So it looks explicit, I will be using my own paths to variables, but you will have to adapt them to your actual paths (e.g., if the version of the solver is not the same). I will be using my **Linux paths, since it just implies copying the last lines of my .profile or .bashrc or /etc/profile or /etc/bash.bashrc file in Linux**. I've adapted them to the Windows command line but, preferably, you would like to edit them via the GUI in windows.
 
 
 CPLEX
 *******
 
-**Linux / Mac: add the following lines to the .bash_profile file**::
+**Linux / Mac: add the following lines to the .profile file or equivalent**::
 
     export CPLEX_HOME="/opt/ibm/ILOG/CPLEX_Studio128/cplex"
     export CPO_HOME="/opt/ibm/ILOG/CPLEX_Studio128/cpoptimizer"
@@ -101,7 +101,7 @@ CPLEX
 GUROBI
 *******
 
-**Linux / Mac: add the following lines to the .bash_profile file**::
+**Linux / Mac: add the following lines to the .profile file**::
 
     export GUROBI_HOME="/opt/gurobi801/linux64"
     export PATH="${PATH}:${GUROBI_HOME}/bin"
@@ -113,3 +113,29 @@ GUROBI
     set PATH=%PATH%;%GUROBI_HOME%/bin
     set LD_LIBRARY_PATH=%LD_LIBRARY_PATH%;%GUROBI_HOME%/lib
 
+Specific solver examples
+----------------------------
+
+
+CPLEX_PY
+**************
+
+For this solver to work there are two options: 
+
+1. Installing the python package that comes with the CPLEX installation (it is not installed automatically).
+2. (**recomended**) Adding the path to the package to the ``PYTHON_PATH`` environment variable.
+
+The second step is already shown in the example above. The first one requires admin rights, the second one does not.
+
+
+GUROBI_PY
+**************
+
+For this solver to work, the only option is to install the python package that comes with the gurobi installation.
+
+Following my installation paths it would be (Linux):
+
+     cd /opt/gurobi801/linux64/
+     sudo python3 setup.py install
+
+As you can see, it is necessary to have admin rights to install it.
