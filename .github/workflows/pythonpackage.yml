@@ -14,6 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - with:
+        ref: ${{ github.event.pull_request.head.ref }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -36,8 +38,6 @@ jobs:
         black pulp/ --check
     - name: If needed, commit black changes to the pull request
       if: failure()
-      with:
-        ref: ${{ github.event.pull_request.head.ref }}
       run: |
         echo On branch ${{ github.event.pull_request.head.ref }}
         black pulp/
