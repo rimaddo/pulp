@@ -118,7 +118,7 @@ except AttributeError:
 
 _DICT_TYPE = dict
 
-if sys.platform not in ["cli"]:
+if sys.platform not in ['cli']:
     # iron python does not like an OrderedDict
     try:
         from odict import OrderedDict
