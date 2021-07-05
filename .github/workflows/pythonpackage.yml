@@ -36,12 +36,12 @@ jobs:
         black pulp/ --check
     - name: If needed, commit black changes to the pull request
       if: failure()
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
       run: |
         black pulp/
-        git config --global user.name 'autoblack'
-        git config --global user.email 'cclauss@users.noreply.github.com'
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-        echo On branch ${{ github.head_ref  }}
-        git checkout ${{ github.head_ref }}
-        git commit -am "fixup: Format Python code with Black"
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git commit -m "fixup: Format Python code with Black" .
         git push
