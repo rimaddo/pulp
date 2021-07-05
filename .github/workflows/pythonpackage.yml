@@ -39,6 +39,7 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.ref }}
       run: |
+        echo On branch ${{ github.event.pull_request.head.ref }}
         black pulp/
         git config user.name github-actions
         git config user.email github-actions@github.com
