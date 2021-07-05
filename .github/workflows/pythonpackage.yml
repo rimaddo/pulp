@@ -36,7 +36,6 @@ jobs:
         black pulp/ --check
     - name: If needed, commit black changes to the pull request
       if: failure()
-      uses: actions/checkout@v2
       with:
         ref: ${{ github.event.pull_request.head.ref }}
       run: |
